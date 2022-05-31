@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tic Tac Toe game</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        .start
+        {
+            height: 70vh;
+            width: 70vw;
+            display: grid;
+            margin: 5vw auto;
+            align-items: center;
+            background-color: rgba(99, 99, 195, 0.608);
+        }
+        .st{
+            display: inline-block;
+            text-align: center;
+
+        }
+        #top{
+            font-size: 7vw;
+        }
+        .but{
+            width: 30vw;
+            font-size: 4vw;
+            margin: auto;
+            background-color: rgb(98, 218, 224);
+            border-radius: 1vw;
+            border: 0px;
+            box-shadow: 0vw 0vw 0.5vw 0.5vw rgb(98, 218, 224) ;
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            height: 94vh;
+            width: 94vw;
+            margin: 20px auto;
+            display: none;
+        }
+
+        .block {
+            width: 30vw;
+            height: 30vh;
+            background-color: antiquewhite;
+            font-size: 15vh;
+            text-align: center;
+            vertical-align: bottom;
+        }
+        #b2 {
+            border-right: 2vw solid black;
+            border-left: 2vw solid black;
+        }
+
+        #b4 {
+            border-top: 2vw solid black;
+            border-bottom: 2vw solid black;
+        }
+
+        #b5 {
+            border: 2vw solid black;
+        }
+
+        #b6 {
+            border-top: 2vw solid black;
+            border-bottom: 2vw solid black;
+        }
+
+        #b8 {
+            border-left: 2vw solid black;
+            border-right: 2vw solid black;
+        }
+        .end{
+            height: 90vh;
+            width: 90vw;
+            display: grid;
+            margin: 5vw auto;
+            align-items: center;
+            background-color: rgba(99, 99, 195, 0.608);
+            display: none;
+        }
+        #sc{
+            font-size: 5vw;
+            text-align: center;
+            margin: 1vw auto;
+            height: 7vw;
+        }
+        #score{
+            display: flex;
+            font-size: 4vw;
+        }
+        .red{
+            border: 3px solid black;
+            margin: 1vw auto;
+            display: grid;
+            text-align: center;
+            width: 30vw;
+            background-color: rgba(217, 76, 76, 0.664);
+        }
+        .blue{
+            border: 3px solid black;
+            margin: 1vw auto;
+            display: grid;
+            text-align: center;
+            width: 30vw;
+            background-color: rgba(69, 116, 225, 0.664);
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <div class="start" id="open">
+        <div id="top" class="st">Tic Take Toe Game!!!!</div>
+        <button class="but" onclick="star()">START</button>
+    </div>
+    <div class="container" id="contain">
+        <div class="block" id="b1" onclick="f1()"></div>
+        <div class="block" id="b2" onclick="f2()"></div>
+        <div class="block" id="b3" onclick="f3()"></div>
+        <div class="block" id="b4" onclick="f4()"></div>
+        <div class="block" id="b5" onclick="f5()"></div>
+        <div class="block" id="b6" onclick="f6()"></div>
+        <div class="block" id="b7" onclick="f7()"></div>
+        <div class="block" id="b8" onclick="f8()"></div>
+        <div class="block" id="b9" onclick="f9()"></div>
+    </div>
+    <div class="end" id="end1">
+        <div id="sc">Score</div>
+        <div id="score">
+            <div class="red" >
+                <div id="red1" class="head">RED TEAM</div>
+                <div id="red2" class="num">1</div>
+            </div>
+            <div class="blue">
+                <div id="blue1" class="head">BLUE TEAM</div>
+                <div id="blue2" class="num">2</div>
+            </div>
+        </div>
+        <button class="but" onclick="end()">Restart match</button>
+        <button class="but" onclick="mainmenu()">To main menu</button>
+    </div>
+
+
+
+    <script>
+        // alert('Lets start the game')
+        // alert("RED Team Turn!!!!");
+        var count = 0;
+        var flag=0;
+        var redTeam=0;
+        var blueTeam=0;
+
+        let c1 = document.getElementById('b1')
+        let c2 = document.getElementById('b2')
+        let c3 = document.getElementById('b3')
+        let c4 = document.getElementById('b4')
+        let c5 = document.getElementById('b5')
+        let c6 = document.getElementById('b6')
+        let c7 = document.getElementById('b7')
+        let c8 = document.getElementById('b8')
+        let c9 = document.getElementById('b9')
+        function flagfunc() {
+
+            if((c1.innerHTML == 'X' && c2.innerHTML == 'X' && c3.innerHTML == 'X') || (c4.innerHTML == 'X' && c5.innerHTML == 'X' && c6.innerHTML == 'X') 
+             || (c7.innerHTML == 'X' && c8.innerHTML == 'X' && c9.innerHTML == 'X') || (c1.innerHTML == 'X' && c4.innerHTML == 'X' && c7.innerHTML == 'X')
+             || (c2.innerHTML == 'X' && c8.innerHTML == 'X' && c5.innerHTML == 'X') || (c3.innerHTML == 'X' && c6.innerHTML == 'X' && c9.innerHTML == 'X')
+             || (c1.innerHTML == 'X' && c5.innerHTML == 'X' && c9.innerHTML == 'X') || (c3.innerHTML == 'X' && c5.innerHTML == 'X' && c7.innerHTML == 'X'))
+            {
+                    alert("Red Team Wins"); 
+                    redTeam++; 
+                    flag=1;
+                    end3();  
+            }
+            if((c1.innerHTML == 'O' && c2.innerHTML == 'O' && c3.innerHTML == 'O') || (c4.innerHTML == 'O' && c5.innerHTML == 'O' && c6.innerHTML == 'O') 
+             || (c7.innerHTML == 'O' && c8.innerHTML == 'O' && c9.innerHTML == 'O') || (c1.innerHTML == 'O' && c4.innerHTML == 'O' && c7.innerHTML == 'O')
+             || (c2.innerHTML == 'O' && c8.innerHTML == 'O' && c5.innerHTML == 'O') || (c3.innerHTML == 'O' && c6.innerHTML == 'O' && c9.innerHTML == 'O')
+             || (c1.innerHTML == 'O' && c5.innerHTML == 'O' && c9.innerHTML == 'O') || (c3.innerHTML == 'O' && c5.innerHTML == 'O' && c7.innerHTML == 'O'))
+            {
+                    alert("Blue Team Wins"); 
+                    blueTeam++;
+                    flag=1;
+                    end3();
+            }
+             
+        }
+
+        function star()
+        {
+            document.getElementById("open").style="display:none"
+            c1.innerText='';c2.innerText='';c3.innerText='';c4.innerText='';c5.innerText='';c6.innerText='';c7.innerText='';c8.innerText='';c9.innerText='';
+            c1.style.backgroundColor="antiquewhite";c2.style.backgroundColor="antiquewhite";c3.style.backgroundColor="antiquewhite";c4.style.backgroundColor="antiquewhite";c5.style.backgroundColor="antiquewhite";c6.style.backgroundColor="antiquewhite";c7.style.backgroundColor="antiquewhite";c8.style.backgroundColor="antiquewhite";c9.style.backgroundColor="antiquewhite";
+            flag=0;
+            count=0;
+            document.getElementById("contain").style="display:flex"
+        }
+        function end()
+        {
+            document.getElementById("end1").style="display:none";
+            c1.innerText='';c2.innerText='';c3.innerText='';c4.innerText='';c5.innerText='';c6.innerText='';c7.innerText='';c8.innerText='';c9.innerText='';
+            c1.style.backgroundColor="antiquewhite";c2.style.backgroundColor="antiquewhite";c3.style.backgroundColor="antiquewhite";c4.style.backgroundColor="antiquewhite";c5.style.backgroundColor="antiquewhite";c6.style.backgroundColor="antiquewhite";c7.style.backgroundColor="antiquewhite";c8.style.backgroundColor="antiquewhite";c9.style.backgroundColor="antiquewhite";
+            flag=0;
+            count=0;
+            document.getElementById("contain").style="display:flex";
+        }
+        function mainmenu()
+        {
+            document.getElementById("end1").style="display:none";
+            c1.innerText='';c2.innerText='';c3.innerText='';c4.innerText='';c5.innerText='';c6.innerText='';c7.innerText='';c8.innerText='';c9.innerText='';
+            c1.style.backgroundColor="antiquewhite";c2.style.backgroundColor="antiquewhite";c3.style.backgroundColor="antiquewhite";c4.style.backgroundColor="antiquewhite";c5.style.backgroundColor="antiquewhite";c6.style.backgroundColor="antiquewhite";c7.style.backgroundColor="antiquewhite";c8.style.backgroundColor="antiquewhite";c9.style.backgroundColor="antiquewhite";
+            flag=0
+            blueTeam=0;
+            redTeam=0;
+            count=0;
+            document.getElementById("open").style="display:grid";
+        }
+        function end3()
+        {
+            document.getElementById("contain").style="display:none";
+            c1.innerText='';c2.innerText='';c3.innerText='';c4.innerText='';c5.innerText='';c6.innerText='';c7.innerText='';c8.innerText='';c9.innerText='';
+            c1.style.backgroundColor="antiquewhite";c2.style.backgroundColor="antiquewhite";c3.style.backgroundColor="antiquewhite";c4.style.backgroundColor="antiquewhite";c5.style.backgroundColor="antiquewhite";c6.style.backgroundColor="antiquewhite";c7.style.backgroundColor="antiquewhite";c8.style.backgroundColor="antiquewhite";c9.style.backgroundColor="antiquewhite";
+            flag=0;
+            count=0;
+            document.getElementById("blue2").innerHTML=`${blueTeam}`
+            document.getElementById("red2").innerHTML=`${redTeam}`
+            document.getElementById("end1").style="display:grid";
+        }
+
+        function f1() {
+            if (c1.innerHTML == '' && count % 2 == 0) { c1.innerHTML = 'X';c1.style.backgroundColor="red"; count++; flagfunc();condition() }
+            if (c1.innerHTML == '' && count % 2 == 1) { c1.innerHTML = 'O';c1.style.backgroundColor="blue"; count++; flagfunc();condition() }
+
+        }
+        function f2() {
+            if (c2.innerHTML == '' && count % 2 == 0) { c2.innerHTML = 'X';c2.style.backgroundColor="red"; count++; flagfunc();condition() }
+            if (c2.innerHTML == '' && count % 2 == 1) { c2.innerHTML = 'O';c2.style.backgroundColor="blue"; count++; flagfunc();condition() }
+        }
+        function f3() {
+            if (c3.innerHTML == '' && count % 2 == 0) { c3.innerHTML = 'X';c3.style.backgroundColor="red"; count++; flagfunc();condition() }
+            if (c3.innerHTML == '' && count % 2 == 1) { c3.innerHTML = 'O';c3.style.backgroundColor="blue"; count++; flagfunc();condition() }
+        }
+        function f4() {
+            if (c4.innerHTML == '' && count % 2 == 0) { c4.innerHTML = 'X';c4.style.backgroundColor="red"; count++; flagfunc();condition() }
+            if (c4.innerHTML == '' && count % 2 == 1) { c4.innerHTML = 'O';c4.style.backgroundColor="blue"; count++; flagfunc();condition() }
+        }
+        function f5() {
+            if (c5.innerHTML == '' && count % 2 == 0) { c5.innerHTML = 'X';c5.style.backgroundColor="red"; count++; flagfunc();condition() }
+            if (c5.innerHTML == '' && count % 2 == 1) { c5.innerHTML = 'O';c5.style.backgroundColor="blue"; count++; flagfunc();condition() }
+        }
+        function f6() {
+            if (c6.innerHTML == '' && count % 2 == 0) { c6.innerHTML = 'X';c6.style.backgroundColor="red"; count++; flagfunc();condition() }
+            if (c6.innerHTML == '' && count % 2 == 1) { c6.innerHTML = 'O';c6.style.backgroundColor="blue"; count++; flagfunc();condition() }
+        }
+        function f7() {
+            if (c7.innerHTML == '' && count % 2 == 0) { c7.innerHTML = 'X';c7.style.backgroundColor="red"; count++; flagfunc();condition() }
+            if (c7.innerHTML == '' && count % 2 == 1) { c7.innerHTML = 'O';c7.style.backgroundColor="blue"; count++; flagfunc();condition() }
+        }
+        function f8() {
+            if (c8.innerHTML == '' && count % 2 == 0) { c8.innerHTML = 'X';c8.style.backgroundColor="red"; count++; flagfunc();condition() }
+            if (c8.innerHTML == '' && count % 2 == 1) { c8.innerHTML = 'O';c8.style.backgroundColor="blue"; count++; flagfunc();condition() }
+        }
+        function f9() {
+            if (c9.innerHTML == '' && count % 2 == 0) { c9.innerHTML = 'X';c9.style.backgroundColor="red"; count++; flagfunc();condition() }
+            if (c9.innerHTML == '' && count % 2 == 1) { c9.innerHTML = 'O';c9.style.backgroundColor="blue"; count++; flagfunc();condition() }
+        }
+        function condition()
+        {
+        if(count>=9&&flag==0){
+            alert("Match is tied between both Teams")
+            end3();
+            
+        }
+        }
+    </script>
+</body>
+
+</html>
